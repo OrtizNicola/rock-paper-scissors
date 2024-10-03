@@ -23,34 +23,34 @@ function playRound(humanChoice, computerChoice) {
             results.textContent = "No one wins!";
         }
         else if (computerChoice == "paper") {
-            results.textContent ="Paper beats Rock: You Lose!";
+            results.textContent = "Paper beats Rock: \nYou Lose!";
             computerScore += 1;   
         }
         else if (computerChoice == "scissors") {
-            results.textContent ="Rock beats Scissors: You Win!";
+            results.textContent = "Rock beats Scissors: \nYou Win!";
             humanScore += 1;
         }
     }
     else if (humanChoice == "paper") {
         if (computerChoice == "rock") {
-            results.textContent = "Paper beats Rock: You Win!";
+            results.textContent = "Paper beats Rock: \nYou Win!";
             humanScore += 1;
         }
         else if (computerChoice == "paper") {
             results.textContent = "No one wins!";  
         }
         else if (computerChoice == "scissors") {
-            results.textContent = "Scissors beat Paper: You Lose!";
+            results.textContent = "Scissors beat Paper: \nYou Lose!";
             computerScore += 1;
         }
     }
     else if (humanChoice == "scissors") {
         if (computerChoice == "rock") {
-            results.textContent = "Rock beats Scissors: You Lose!";
+            results.textContent = "Rock beats Scissors: \nYou Lose!";
             computerScore += 1;
         }
         else if (computerChoice == "paper") {
-            results.textContent = "Scissors beat Paper: You Win!";
+            results.textContent = "Scissors beat Paper: \nYou Win!";
             humanScore += 1;
         }
         else if (computerChoice == "scissors") {
@@ -58,7 +58,7 @@ function playRound(humanChoice, computerChoice) {
         }
     }
     else {
-        results.textContent = "Invalid input: You Lose!";
+        results.textContent = "Invalid input: \nYou Lose!";
         computerScore += 1;        
     }
 }
@@ -75,7 +75,7 @@ buttons.forEach((button) => {
 
         scores.innerHTML = `
         Human Score: ${humanScore}
-        Computer Score: ${computerScore}`
+        Computer Score: ${computerScore}`;
 
         if (humanScore == 5 || computerScore == 5) {
             let winner;
@@ -87,6 +87,22 @@ buttons.forEach((button) => {
             endOfGame.innerHTML = 
             `END OF THE GAME 
             <p>${winner} wins!</p>`;
+
+            let buttonsDiv = document.querySelector(".buttons");
+            buttonsDiv.style.display = "none";
+
+            let playAgain = document.createElement("button");
+            playAgain.textContent = "Play Again!";
+            playAgain.addEventListener("click", () => {
+                endOfGame.textContent = "";
+                scores.textContent = "";
+                selection.textContent = "";
+                results.textContent = "";
+                humanScore = 0;
+                computerScore = 0;
+                buttonsDiv.style.display = "block";
+            })
+            endOfGame.appendChild(playAgain);
         }
     })
 })
